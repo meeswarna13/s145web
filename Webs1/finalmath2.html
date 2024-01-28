@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MATH FUNCTIONS</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color:grey;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #mathOutput {
+            margin-top: 20px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Math Functions</h2>
+
+    <label for="inputNumber">Enter a Number:</label>
+    <input type="number" id="inputNumber" placeholder="Enter a number">
+
+    <label for="inputMinValue">Enter a value for Min:</label>
+    <input type="number" id="inputMinValue" placeholder="Enter a value for Min">
+
+    <label for="inputMaxValue">Enter a value for Max:</label>
+    <input type="number" id="inputMaxValue" placeholder="Enter a value for Max">
+
+    <label for="inputAbsValue">Enter a value for Abs:</label>
+    <input type="number" id="inputAbsValue" placeholder="Enter a value for Abs">
+
+    <button onclick="mathFunctions()">Submit</button>
+    <div id="mathOutput"></div>
+
+    <script>
+        function mathFunctions() {
+            var inputNumber = parseFloat(document.getElementById("inputNumber").value);
+            var inputMinValue = parseFloat(document.getElementById("inputMinValue").value);
+            var inputMaxValue = parseFloat(document.getElementById("inputMaxValue").value);
+            var inputAbsValue = parseFloat(document.getElementById("inputAbsValue").value);
+            var mathOutput = document.getElementById("mathOutput");
+
+            var squareRoot = Math.sqrt(inputNumber);
+            var roundedNumber = Math.round(inputNumber);
+            var randomValue = Math.random();
+
+            var eValue = Math.E;
+            var piValue = Math.PI;
+            var sqrt2Value = Math.SQRT2;
+            var sqrt1_2Value = Math.SQRT1_2;
+            var ln2Value = Math.LN2;
+            var ln10Value = Math.LN10;
+            var log2eValue = Math.LOG2E;
+
+            var ceilValue = Math.ceil(inputNumber);
+            var floorValue = Math.floor(inputNumber);
+            var truncValue = Math.trunc(inputNumber);
+            var signValue = Math.sign(inputNumber);
+            var powValue = Math.pow(inputNumber, 2);
+            var absValue = Math.abs(inputAbsValue);
+            var minValue = Math.min(inputNumber, inputMinValue);
+            var maxValue = Math.max(inputNumber, inputMaxValue);
+            var logValue = Math.log(inputNumber);
+
+            mathOutput.innerHTML = "<h2>Results:</h2>";
+            mathOutput.innerHTML += "<p><strong>Square Root:</strong> " + squareRoot + "</p>";
+            mathOutput.innerHTML += "<p><strong>Rounded Number:</strong> " + roundedNumber + "</p>";
+            mathOutput.innerHTML += "<p><strong>Random Value:</strong> " + randomValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.E:</strong> " + eValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.PI:</strong> " + piValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.SQRT2:</strong> " + sqrt2Value + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.SQRT1_2:</strong> " + sqrt1_2Value + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.LN2:</strong> " + ln2Value + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.LN10:</strong> " + ln10Value + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.LOG2E:</strong> " + log2eValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.ceil:</strong> " + ceilValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.floor:</strong> " + floorValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.trunc:</strong> " + truncValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.sign:</strong> " + signValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.pow:</strong> " + powValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.abs:</strong> " + absValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.min:</strong> " + minValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.max:</strong> " + maxValue + "</p>";
+            mathOutput.innerHTML += "<p><strong>Math.log:</strong> " + logValue + "</p>";
+        }
+    </script>
+</body>
+</html>

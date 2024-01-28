@@ -1,0 +1,58 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Image and Text Hover</title>
+<h1><center>Image and Text Hover</center></h1>
+<style>
+#flower{
+    padding-top:60px;
+} 
+#image-container {
+position: relative;
+background-color: white;
+text-align: center;
+}
+#image-container img {
+width: 50%;
+height: auto; }
+
+#hidden-content {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color:white;
+color:black;
+text-align: center;
+display: none; }
+</style>
+</head>
+<body>
+<center>
+<div id="flower">
+<div id="image-container">
+<img src="lotus.jpg" alt="Image 1"   >
+<p id="image-text"></p>
+<div id="hidden-content">
+<img src="dalia.jpg" alt="Image 2" >
+<p id="image-text">This is Dalia!!</p>
+</div>
+</div>
+</div>
+</center>
+<script>
+    const imageContainer = document.getElementById('image-container');
+    const hiddenContent = document.getElementById('hidden-content');
+    const imageText = document.getElementById('image-text');
+    imageContainer.addEventListener('mouseover', () => {
+    hiddenContent.style.display = 'block';  
+    imageText.textContent = 'This is a Dalia!!'; }); 
+    imageContainer.addEventListener('mouseout', () => {
+    hiddenContent.style.display = 'none';
+    imageText.textContent = 'This is a Lotus '; });
+    </script>
+    </body>
+    </html>
+    
+

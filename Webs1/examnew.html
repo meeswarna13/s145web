@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        body {
+            font-family: 'Times New Roman';
+            margin: 50px;
+            background-color: lightpink;
+        }
+
+        #exam-container {
+            max-width: 600px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color:red;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            color: blue;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .correct::before {
+            content: '\2713'; 
+            font-size: small;
+            color: green;
+            margin-right: 5px;
+        }
+
+        .incorrect::before {
+            content: '\2717'; 
+            font-size: small;
+            color: red;
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #28a745;
+            border: none;
+            border-radius: 4px;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: center;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="exam-container">
+        <h1>QUIZ MASTER</h1>
+
+        <p>Read the instructions carefully before answering:<br>1 Mark will be awarded for each correct answer. There is no negative marking.<br>
+            The time limit is 45 min.<br>
+            Good luck!</p>
+
+        <div class="question" id="q1">
+            <p>1. Which is the longest river in the world?</p>
+            <div class="options" data-correct="b">
+                <label><input type="radio" name="q1" value="a"> Niger</label>
+                <label><input type="radio" name="q1" value="b"> Nile</label>
+                <label><input type="radio" name="q1" value="c"> Ganga</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q2">
+            <p>2. Environment Day is celebrated on?</p>
+            <div class="options" data-correct="b">
+                <label><input type="radio" name="q2" value="a"> June 6</label>
+                <label><input type="radio" name="q2" value="b"> June 5</label>
+                <label><input type="radio" name="q2" value="c"> June 11</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q3">
+            <p>3. Which is the largest ocean in the world?</p>
+            <div class="options" data-correct="c">
+                <label><input type="radio" name="q3" value="a"> Arctic Ocean</label>
+                <label><input type="radio" name="q3" value="b"> Indian Ocean</label>
+                <label><input type="radio" name="q3" value="c"> Pacific Ocean</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q4">
+            <p>4. Which is the smallest prime number?</p>
+            <div class="options" data-correct="b">
+                <label><input type="radio" name="q4" value="a"> 1</label>
+                <label><input type="radio" name="q4" value="b"> 2</label>
+                <label><input type="radio" name="q4" value="c"> 3</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <div class="question" id="q5">
+            <p>5. What is the value of 3 + 2?</p>
+            <div class="options" data-correct="c">
+                <label><input type="radio" name="q5" value="a"> 3</label>
+                <label><input type="radio" name="q5" value="b"> 9</label>
+                <label><input type="radio" name="q5" value="c"> 5</label>
+            </div>
+            <div class="feedback"></div>
+        </div>
+
+        <button onclick="submitExam()">Submit</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let score = 0;
+
+        function submitExam() {
+            let feedback = '';
+
+            checkAnswer('q1');
+            checkAnswer('q2');
+            checkAnswer('q3');
+            checkAnswer('q4');
+            checkAnswer('q5');
+
+            const resultElement = document.getElementById('result');
+            resultElement.innerHTML = 'Your score is: ' + score + ' out of 5<br>' + feedback;
+
+            return false;
+        }
+
+        function checkAnswer(questionId) {
+            const questionElement = document.getElementById(questionId);
+            const options = questionElement.querySelectorAll(`input[name="${questionId}"]:checked`);
+            const correctAnswer = questionElement.querySelector('.options').dataset.correct;
+            const feedbackElement = questionElement.querySelector('.feedback');
+
+            if (options.length > 0) {
+                const userAnswer = options[0].value;
+                if (userAnswer === correctAnswer) {
+                    score++;
+                    feedbackElement.innerHTML = `Your answer is correct! <span class="correct"></span>`;
+                } else {
+                    feedbackElement.innerHTML = `Your answer is incorrect. Correct answer is ${correctAnswer}. <span class="incorrect"></span>`;
+                }
+            } else {
+                feedbackElement.innerHTML = 'Question not answered. <span class="incorrect"></span>';
+            }
+        }
+    </script>
+
+</body>
+
+</html>

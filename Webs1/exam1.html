@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #exam-container {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .question {
+            margin-bottom: 20px;
+            color: blue;
+        }
+
+        .question input[type="radio"] + label {
+            color: black;
+        }
+
+        .correct {
+            color: green;
+        }
+
+        .incorrect {
+            color: red;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+
+<div id="exam-container">
+    <h1>QUIZ MASTER</h1>
+
+    <div class="question" id="q1">
+        <p>1.Which is the longest River in the world?</p>
+        <input type="radio" name="q1" id="q1a" value="a"> <label for="q1a">Niger</label><br>
+        <input type="radio" name="q1" id="q1b" value="b"> <label for="q1b">Nile</label><br>
+        <input type="radio" name="q1" id="q1c" value="c"> <label for="q1c">Ganga</label><br>
+    </div>
+
+    <div class="question" id="q2">
+        <p>2. Environment Day is celebrated on?</p>
+        <input type="radio" name="q2" id="q2a" value="a"> <label for="q2a">June 6</label><br>
+        <input type="radio" name="q2" id="q2b" value="b"> <label for="q2b">June 5</label><br>
+        <input type="radio" name="q2" id="q2c" value="c"> <label for="q2c">June 11</label><br>
+    </div>
+
+    <div class="question" id="q3">
+        <p>3. Which is the largest ocean in the world?</p>
+        <input type="radio" name="q3" id="q3a" value="a"> <label for="q3a">Arctic Ocean</label><br>
+        <input type="radio" name="q3" id="q3b" value="b"> <label for="q3b">Indian Ocean</label><br>
+        <input type="radio" name="q3" id="q3c" value="c"> <label for="q3c">Pacific Ocean</label><br>
+    </div>
+
+    <div class="question" id="q4">
+        <p>4. Which is the smallest prime number?</p>
+        <input type="radio" name="q4" id="q4a" value="a"> <label for="q4a">1</label><br>
+        <input type="radio" name="q4" id="q4b" value="b"> <label for="q4b">2</label><br>
+        <input type="radio" name="q4" id="q4c" value="c"> <label for="q4c">3</label><br>
+    </div>
+
+    <div class="question" id="q5">
+        <p>5. What is the value of 3+2?</p>
+        <input type="radio" name="q5" id="q5a" value="a"> <label for="q5a">3</label><br>
+        <input type="radio" name="q5" id="q5b" value="b"> <label for="q5b">9</label><br>
+        <input type="radio" name="q5" id="q5c" value="c"> <label for="q5c">5</label><br>
+    </div>
+
+    <button onclick="submitExam()">Submit</button>
+
+
+    <div id="result"></div>
+</div>
+
+<script>
+    function submitExam() {
+        let score = 0;
+        let feedback = '';
+
+        // Check answers and calculate score
+        score = checkAnswer('q1', 'b', 'Nile', score);
+        score = checkAnswer('q2', 'b', 'June 5', score);
+        score = checkAnswer('q3', 'c', 'Pacific Ocean', score);
+        score = checkAnswer('q4', 'b', '2', score);
+        score = checkAnswer('q5', 'c', '5', score);
+
+        // Display result
+        const resultElement = document.getElementById('result');
+        resultElement.innerHTML = 'Your score is: ' + score + ' out of 5<br>' + feedback;
+
+        // Prevent form submission
+        return false;
+    }
+
+    function checkAnswer(questionId, correctAnswer, correctAnswerText, currentScore) {
+        const questionElement = document.getElementById(questionId);
+        const options = questionElement.querySelectorAll(`input[name="${questionId}"]`);
+
+        let userAnswer;
+        options.forEach((option) => {
+            if (option.checked) {
+                userAnswer = option.value;
+            }
+            if (option.value === correctAnswer) {
+                option.labels[0].classList.add('correct');
+            } else if

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendar </title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 80%;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    td {
+        color: red;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    td:hover {
+      background-color: #f5f5f5;
+    }
+
+    .input-container {
+      margin: 20px 0;
+      font-size: 18px;
+    }
+
+    .input-container input {
+      padding: 10px;
+      font-size: 16px;
+      margin-right: 10px;
+      text-align: center;
+    }
+
+    .input-container button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="input-container">
+  <label for="year">Enter the year:</label>
+  <input type="text" id="year" >
+
+  <label for="month">Enter the month:</label>
+  <input type="text" id="month" ><br>
+  <br>
+
+  <button onclick="generateCalendar()"> Submit</button>
+  
+  <div id="selected-info"></div>
+</div>
+
+<script>
+  function generateCalendar() {
+    // Get user input for year and month
+    var yearInput = document.getElementById("year");
+    var monthInput = document.getElementById("month");
+
+    var year = yearInput.value.trim();
+    var month = monthInput.value.trim();
+
+    // Validate input
+    if (!isValidInteger(year) || !isValidInteger(month) || month < 1 || month > 12) {
+      alert("Invalid input. Please enter valid integers for the year and month.");
+      return;
+    }
+
+    
+    document.getElementById("selected-info").innerText = "Calendar for " + getMonthName(month) + " " + year;
+
+    // Create a Date object for the first day of the specified month and year
+    var firstDay = new Date(year, month - 1, 1);
+
+    // Create a table to display the calendar
+    var table = "<table><tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>";
+
+    // Fill in the days of the month in the table
+    for (var i = 0; i < 6; i++) {
+      table += "<tr>";
+
+      for (var j = 0; j < 7; j++) {
+        var day = i * 7 + j - firstDay.getDay() + 2;
+
+        if (day > 0 && day <= new Date(year, month, 0).getDate()) {
+          table += "<td>" + day + "</td>";
+        } else {
+          table += "<td></td>";
+        }
+      }
+
+      table += "</tr>";
+    }
+
+    table += "</table>";
+
+    // Display the table in the body of the HTML document
+    document.body.innerHTML = document.querySelector(".input-container").outerHTML + table;
+  }
+
+  function isValidInteger(value) {
+    return /^[0-9]+$/.test(value);
+  }
+
+  function getMonthName(month) {
+    var monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    return monthNames[month - 1];
+  }
+</script>
+
+</body>
+</html>

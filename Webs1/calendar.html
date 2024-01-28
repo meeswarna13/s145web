@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input, button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Calendar Generator</title>
+</head>
+<body>
+
+    <div>
+        <h2>Calendar Generator</h2>
+        <label for="year">Enter Year:</label>
+        <input type="number" id="year" placeholder="Enter year">
+
+        <label for="month">Enter Month:</label>
+        <input type="number" id="month" placeholder="Enter month">
+
+        <button onclick="generateCalendar()">Generate Calendar</button>
+    </div>
+
+    <div id="calendarContainer"></div>
+
+    <script>
+        function generateCalendar() {
+            var year = document.getElementById('year').value;
+            var month = document.getElementById('month').value;
+
+            if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+                alert('Please enter valid year and month.');
+                return;
+            }
+
+            var daysInMonth = new Date(year, month, 0).getDate();
+            var firstDay = new Date(year, month - 1, 1).getDay();
+
+            var calendarHTML = '<table>';
+            calendarHTML += '<tr><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th></tr>';
+
+            var dayCounter = 1;
+            for (var i = 0; i < 6; i++) {
+                calendarHTML += '<tr>';
+                for (var j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        calendarHTML += '<td></td>';
+                    } else if (dayCounter > daysInMonth) {
+                        break;
+                    } else {
+                        calendarHTML += '<td>' + dayCounter + '</td>';
+                        dayCounter++;
+                    }
+                }
+                calendarHTML += '</tr>';
+            }
+
+            calendarHTML += '</table>';
+
+            document.getElementById('calendarContainer').innerHTML = calendarHTML;
+        }
+    </script>
+
+</body>
+</html>
